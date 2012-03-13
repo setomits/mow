@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %} : {%
+  if entries %}{%
+    if entries.length == 1 %}Entry{%
+    else %}Entries{%
+    endif %}{%
+  else %}No entry{%
+  endif %} in {{ year }}-{{ month }}{% endblock %}
+
+{% block canonical %}month/{{ year }}-{{ month }}/{% if page_num > 1
+%}{{ page_num }}{% endif %}{% endblock %}
+
+{% block main_contents %}
+  {% if entries %}
+    {% include "month_paging.html" %}
+    {% for entry in entries %}
+      {% include "entry_mini.html" %}
+    {% endfor %}
+    {% include "month_paging.html" %}
+  {% else %}
+    {% include "no_entry.html" %}
+  {% endif %}
+{% endblock %}

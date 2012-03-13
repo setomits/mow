@@ -1,0 +1,24 @@
+<div class="subBlock">
+  <div class="title">Tags</div>
+  <div id="allTags">
+{% if sub_tags %}
+    <ul>
+  {% for tag in sub_tags %}
+      <li>
+        <a href="{{ blog_path }}/tag/{{ tag.urlencoded }}/" rel="tag"
+           title="{{ tag.name }} ({{ tag.count }})">
+          <span>{{ tag.name }}<em>{{ tag.count }}</em></span>
+        </a>
+      </li>
+  {% endfor %}
+      <li class="expander">
+        <a href="javascript:MOW.expandAllTags();" title="All Tags">
+          <span>&nbsp;<em><i class="icon-tags"></i>All Tags ...</em></span>
+        </a>
+      </li>
+    </ul>
+{% else %}
+    <span>No Tags yet.</span>
+{% endif %}
+  </div>
+</div>

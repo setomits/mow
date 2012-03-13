@@ -1,0 +1,21 @@
+<div class="subBlock">
+  <div class="title">Recent Comments</div>
+  <div id="recentComments">
+{% if sub_recent_comments %}
+    <ul>
+  {% for comment in sub_recent_comments %}
+      <li>
+        <a href="{{ blog_path }}/{{ comment.eid }}#{{ comment.cid }}"
+           title="{{ comment.year }} {{ comment.posted_month_str() }} {{
+                  comment.posted_day_str()
+                  }} {{ comment.hour }}:{{ comment.minute }}">
+          {{ comment.title }} by {{ comment.author }}
+        </a>
+      </li>
+  {% endfor %}
+    </ul>
+{% else %}
+    <span>No Comments yet.</span>
+{% endif %}
+  </div>
+</div>

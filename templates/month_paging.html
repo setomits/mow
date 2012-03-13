@@ -1,0 +1,25 @@
+<nav class="paging row">
+  <span class="older span3">
+    {% if older_num %}
+    <a href="{{ blog_root }}/month/{{ year }}-{{ month }}/{{ older_num }}">
+      <i class="icon-chevron-left"></i> Older
+    </a>
+    {% else %}
+    <span class="disabled">Older</span>
+    {% endif %}
+  </span>
+
+  <span class="newer span3 offset3">
+    {% if newer_num == 1 %}
+    <a href="{{ blog_root }}/month/{{ year }}-{{ month }}/">
+      Newer <i class="icon-chevron-right"></i>
+    </a>
+    {% elif newer_num > 1 %}
+    <a href="{{ blog_root }}/month/{{ year }}-{{ month }}/{{ newer_num }}">
+      Newer <i class="icon-chevron-right"></i>
+    </a>
+    {% else %}
+    <span class="disabled">Newer</span>
+    {% endif %}
+  </span>
+</nav>

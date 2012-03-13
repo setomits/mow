@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %} : {%
+  if entries %}{%
+    if entries|length == 1 %}Entry{%
+    else %}Entries{%
+    endif %}{%
+  else %}No entry{%
+  endif %} tagged with "{{ tag.name }}"{% endblock %}
+
+{% block canonical %}tag/{{ tag.urlencoded }}/{% if page_num > 1
+%}{{ page_num }}{% endif %}{% endblock %}
+
+{% block main_contents %}
+  {% if entries %}
+    {% include "tag_paging.html" %}
+    {% for entry in entries %}
+      {% include "entry_mini.html" %}
+    {% endfor %}
+    {% include "tag_paging.html" %}
+  {% else %}
+    {% include "no_entry.html" %}
+  {% endif %}
+{% endblock %}

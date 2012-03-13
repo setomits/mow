@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <channel>
+    <title>{{ blog_title }}{% if with_comments %} with comments{% endif %}</title>
+    <link>{{ blog_root }}/</link>
+    <description>{{ introduction }}</description>
+    <language>{{ lang }}</language>
+    <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+    <generator>mow : blog with mod_wsgi</generator>
+    <atom:link rel="self" type="application/rss+xml"
+               href="{{ blog_root }}/rss" />
+{% for entry in entries %}
+    <item>
+      <title>{{ entry.title }}</title>
+      <link>{{ blog_root }}/{{ entry.eid }}</link>
+      <guid isPermaLink="true">{{ blog_root }}/{{ entry.eid }}</guid>
+      <description><![CDATA[{{ entry.body }} {{ entry.extend }}]]></description>
+      <pubDate>{{ entry.published_at.strftime("%a, %d %b %Y %H:%M:%S +0000") }}</pubDate>
+      <dc:creator>{{ author }}</dc:creator>
+    </item>
+{% endfor %}
+
+{% for comment in comments %}
+    <item>
+      <title>{{ comment.title }}</title>
+      <link>{{ blog_root }}/{{ comment.eid }}#c{{ comment.cid }}</link>
+      <guid isPermaLink="true">{{ blog_root }}/{{ comment.eid }}#c{{ comment.cid }}</guid>
+      <description><![CDATA[{{ comment.body }}]]></description>
+      <pubDate>{{ comment.posted_at.strftime("%a, %d %b %Y %H:%M:%S +0000") }}</pubDate>
+      <dc:creator>{{ comment.author }}</dc:creator>
+    </item>
+{% endfor %}
+  </channel>
+</rss>

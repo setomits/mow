@@ -1,0 +1,16 @@
+<div class="subBlock">
+  <div class="title">Recent Entries</div>
+  <div id="recentEntries">
+{% if sub_recent_entries %}
+    <ul>
+  {% for entry in sub_recent_entries %}
+      <li>
+        <a href="{{ blog_path }}/{{ entry.eid }}">{{ entry.title }}</a>
+      </li>
+  {% endfor %}
+    </ul>
+{% else %}
+    <span>No Entries yet.</span>
+{% endif %}
+  </div>
+</div>

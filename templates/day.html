@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %} : {%
+  if entries %}{%
+    if entries|length == 1 %}Entry{%
+    else %}Entries{%
+    endif %}{%
+  else %}No entry{%
+  endif %} on {{ year }}-{{ month }}-{{ day }}{% endblock %}
+
+{% block canonical %}day/{{ year }}-{{ month }}-{{ day }}{% endblock %}
+
+{% block main_contents %}
+  {% if entries %}
+    {% for entry in entries %}
+      {% include "entry_mini.html" %}
+    {% endfor %}
+  {% else %}
+    {% include "no_entry.html" %}
+  {% endif %}
+{% endblock %}

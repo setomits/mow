@@ -1,0 +1,32 @@
+<article class="entry">
+  <hgroup>
+    <h2><a href="{{ blog_root }}/{{ entry.eid }}">{{ entry.title }}</a></h2>
+{% if entry.subtitle %}
+    <h3>{{ entry.subtitle }}</h3>
+{% endif %}
+  </hgroup>
+  <time datetime="{{ entry.published_at.strftime('%Y-%m-%dT%H:%M:%S+00:00') }}"
+        pubdate>{{ entry.pub_month_str() }} {{ entry.day }}, {{ entry.year }}</time>
+
+  <div class="entryBody">
+    <div class="body">{{ entry.body }}</div>
+{% if entry.extend %}
+    <nav class="more">
+      <a href="{{ blog_root }}/{{ entry.eid }}">Read more ...</a>
+    </nav>
+{% endif %}
+    <nav class="tags">
+{% for tag in entry.tags %}
+      <a href="{{ blog_root }}/tag/{{ tag.urlencoded }}/" class="tag">
+        <i class="icon-tag"></i> {{ tag.name }}
+      </a>
+{% endfor %}
+    </nav>
+    <div class="posted">
+      Posted at {{ "%02d"|format(entry.hour) }}:{{ "%02d"|format(entry.minute) }} |
+      <a href="{{ blog_root }}/{{ entry.eid }}#comments">
+        Comments : {{ entry.comments|length }}
+      </a>
+    </div>
+  </div>
+</article>

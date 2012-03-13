@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %} manage : post entry{% endblock %}
+
+{% block main_contents %}
+<ul class="nav nav-pills">
+  <li><a href="{{ blog_root }}/manage/index">index</a></li>
+  <li class="active"><a href="{{ blog_root }}/manage/post">post</a></li>
+  <li><a href="{{ blog_root }}/manage/entry">entry</a></li>
+  <li><a href="{{ blog_root }}/manage/comment">comment</a></li>
+  <li><a href="{{ blog_root }}/manage/tag">tag</a></li>
+</ul>
+
+<h3>post</h3>
+
+<form action="{{ blog_root }}/manage/post_entry" method="POST"
+      class="form-horizontal" onsubmit="MOW.preventMultiPost();">
+  <fieldset>
+    <div class="control-group">
+      <label for="eid" class="control-label">eid</label>
+      <div class="controls">
+        <input type="text" id="eid" name="eid" class="span6"
+               value="{{ new_eid }}" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label for="ymd" class="control-label">date</label>
+      <div class="controls">
+        <input type="text" id="ymd" name="ymd" class="span6"
+               value="{{ year }}-{{ '%02d'|format(month) }}-{{ '%02d'|format(day) }}"
+               placeholder="yyyy-mm-dd" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label for="hm" class="control-label">time</label>
+      <div class="controls">
+        <input type="text" id="hm" name="hm" class="span6"
+               value="{{ '%02d'|format(hour) }}:{{ '%02d'|format(minute) }}"
+               placeholder="HH:MM"/>
+      </div>
+    </div>
+    <div class="control-group">
+      <label for="title" class="control-label">title</label>
+      <div class="controls">
+        <input type="text" id="title" name="title" class="span6" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label for="tags" class="control-label">tags</label>
+      <div class="controls">
+        <input type="text" id="tags" name="tags" class="span6"
+               placeholder="separate with commas" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label for="body" class="control-label">body</label>
+      <div class="controls">
+        <textarea rows="20" id="body" name="body" class="span6"></textarea>
+      </div>
+    </div>
+    <div class="control-group">
+      <label for="extend" class="control-label">extend</label>
+      <div class="controls">
+        <textarea rows="20" id="extend" name="extend" class="span6"></textarea>
+      </div>
+    </div>
+    <div id="preview" style="display: none">
+      <div id="preview_body"></div>
+      <div id="preview_extend"></div>
+    </div>
+    <div class="form-actions">
+      <input type="submit" id="posting" disabled="disabled"
+             value="Post" class="btn-primary" />
+      <input type="button" id="preview" onclick="MOW.previewEntry()" value="Preview"
+             class="btn-info"/>
+    </div>
+  </fieldset>
+</form>
+{% endblock %}
+
+{% block manage_js %}
+    <script src="{{ blog_path }}/js/mowman.js"></script>
+{% endblock %}

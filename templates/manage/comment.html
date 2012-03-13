@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block title %} manage : edit comment{% endblock %}
+
+{% block main_contents %}
+<ul class="nav nav-pills">
+  <li><a href="{{ blog_root }}/manage/index">index</a></li>
+  <li><a href="{{ blog_root }}/manage/post">post</a></li>
+  <li><a href="{{ blog_root }}/manage/entry">entry</a></li>
+  <li class="active"><a href="{{ blog_root }}/manage/comment">comment</a></li>
+  <li><a href="{{ blog_root }}/manage/tag">tag</a></li>
+</ul>
+
+<h3>comment</h3>
+
+<form class="form-horizontal">
+  <div class="control-group">
+    <label for="cid" class="control-label">cid</label>
+    <div class="controls">
+      <input type="text" id="cid" class="span6"
+{% if comment %}
+             value="{{ comment.cid }}"
+{% endif %}
+             />
+      <input type="button" class="btn-primary" value="Load"
+             onclick="MOW.loadComment()" />
+    </div>
+  </div>
+  <div class="control-group">
+    <label for="eid" class="control-label">eid</label>
+    <div class="controls">
+{% if comment %}
+      <input type="text" id="eid" class="span6"
+             value="{{ comment.eid }}" />
+      <input type="button" class="btn" value="Save"
+             onclick="MOW.updateComment('eid')" />
+{% else %}
+      <input type="text" class="span6" disabled="disabled" />
+      <input type="button" class="btn" disabled="disabled" value="Save" />
+{% endif %}
+    </div>
+  </div>
+  <div class="control-group">
+    <label for="ymd" class="control-label">date</label>
+    <div class="controls">
+{% if comment %}
+      <input type="text" id="ymd" class="span6"
+             value="{{ comment.year }}-{{
+                    '%02d'|format(comment.month) }}-{{
+                    '%02d'|format(comment.day) }}" />
+      <input type="button" class="btn" value="Save"
+             onclick="MOW.updateComment('ymd')" />
+{% else %}
+      <input type="text" class="span6" disabled="disabled" />
+      <input type="button" class="btn" disabled="disabled" value="Save" />
+{% endif %}
+    </div>
+  </div>
+  <div class="control-group">
+    <label for="time" class="control-label">time</label>
+    <div class="controls">
+{% if comment %}
+      <input type="text" id="hm" class="span6"
+             value="{{ '%02d'|format(comment.hour) }}:{{
+                    '%02d'|format(comment.minute) }}" />
+      <input type="button" class="btn" value="Save"
+             onclick="MOW.updateComment('hm')" />
+{% else %}
+      <input type="text" class="span6" disabled="disabled" />
+      <input type="button" class="btn" disabled="disabled" value="Save" />
+{% endif %}
+    </div>
+  </div>
+  <div class="control-group">
+    <label for="ymdhm" class="control-label">ymdhm</label>
+    <div class="controls">
+{% if comment %}
+      <input type="text" id="ymdhm" class="span6" value="{{ comment.iymdhm }}" />
+      <input type="button" class="btn" value="Save"
+             onclick="MOW.updateComment('ymdhm')" />
+{% else %}
+      <input type="text" class="span6" disabled="disabled" />
+      <input type="button" class="btn" disabled="disabled" value="Save" />
+{% endif %}
+    </div>
+  </div>
+  <div class="control-group">
+    <label for="title" class="control-label">author</label>
+    <div class="controls">
+{% if comment %}
+      <input type="text" id="title" class="span6" value="{{ comment.author }}" />
+      <input type="button" class="btn" value="Save"
+             onclick="MOW.updateComment('author')" />
+{% else %}
+      <input type="text" class="span6" disabled="disabled" />
+      <input type="button" class="btn" disabled="disabled" value="Save" />
+{% endif %}
+    </div>
+  </div>
+  <div class="control-group">
+    <label for="title" class="control-label">title</label>
+    <div class="controls">
+{% if comment %}
+      <input type="text" id="title" class="span6" value="{{ comment.title }}" />
+      <input type="button" class="btn" value="Save"
+             onclick="MOW.updateComment('title')" />
+{% else %}
+      <input type="text" class="span6" disabled="disabled" />
+      <input type="button" class="btn" disabled="disabled" value="Save" />
+{% endif %}
+    </div>
+  </div>
+  <div class="control-group">
+    <label for="body" class="control-label">body</label>
+    <div class="controls">
+{% if comment %}
+      <textarea rows="20" id="body" class="span6">{{ comment.body }}</textarea>
+      <input type="button" class="btn" value="Save"
+             onclick="MOW.updateComment('body')" />
+{% else %}
+      <textarea rows="20" class="span6" disabled="disabled"></textarea>
+      <input type="button" class="btn" disabled="disabled" value="Save" />
+{% endif %}
+    </div>
+  </div>
+  <div class="control-group">
+    <label for="title" class="control-label">visible</label>
+    <div class="controls">
+{% if comment %}
+      <input type="checkbox" id="visible"
+  {% if comment.visible %}
+             checked="checked"
+  {% endif %}
+             />
+      <input type="button" class="btn" value="Save"
+             onclick="MOW.updateComment('visible')" />
+{% else %}
+      <input type="checkbox" disabled="disabled" />
+      <input type="button" class="btn" disabled="disabled" value="Save" />
+{% endif %}
+    </div>
+  </div>
+</form>
+
+<div class="form-actions">
+{% if comment %}
+  <form class="form-horizontal" action="{{ blog_root}}/manage/delete_comment"
+        method="POST" onsubmit="return MOW.confirmToDelete('comment');">
+    <input type="hidden" name="cid" value="{{ comment.cid }}" />
+    <input type="submit" value="delete this comment" class="btn-danger" />
+  </form>
+{% else %}
+  <input type="submit" value="delete this comment" class="btn-danger"
+         disabled="disabled" />
+{% endif %}
+</div>
+{% endblock %}
+
+{% block manage_js %}
+    <script src="{{ blog_path }}/js/mowman.js"></script>
+{% endblock %}

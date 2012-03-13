@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="content-script-type" content="text/javascript" />
+    <meta http-equiv="content-style-type" content="text/css" />
+    <meta name="author" content="{{ author }}" />
+    <meta name="description" content="{{ introduction }}" />
+    <meta name="generator" content="mow : blog with mod_wsgi" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ blog_root }}/rss" />
+    <link rel="index" href="{{ blog_path }}/" />
+    <link href="{{ blog_root }}/{% block canonical %}{% endblock %}"
+          rel="canonical" />
+    <link rel="stylesheet" href="{{ blog_path }}/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{ blog_path }}/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="{{ blog_path }}/css/mow.css" />
+    <link rel="shortcut icon" href="{{ blog_path }}/image/favicon.ico" />
+    <link rel="icon" href="{{ blog_path }}/image/favicon.ico" type="image/vnd.microsoft.icon" />
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>{{ blog_title}}{% block title %}{% endblock %}</title>
+    <script>
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-714678-2']);
+      _gaq.push(['_trackPageview']);
+      
+      (function() {
+      var ga = document.createElement('script'); ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <header class="span9">
+          <h1><a href="{{ blog_root }}/"><span></span>{{ blog_title }}</a></h1>
+          <div class="introduction">{{ introduction }}</div>
+        </header>
+      </div>
+
+      <div class="row contents">
+        <div class="span9">
+{% block main_contents %}{% endblock %}
+        </div>
+        <aside class="span3">
+{% include "sub_contents.html" %}
+        </aside>
+      </div>
+
+      <footer>
+        <p>Blogged with mow</p>
+      </footer>
+    </div>
+    {{ tracking_code }}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    <script src="{{ blog_path }}/js/jquery.cookie.js"></script>
+    <script src="{{ blog_path }}/js/mow.js"></script>
+    <script>MOW.vars.blog_path = "{{ blog_path }}";</script>
+{% block manage_js %}{% endblock %}
+  </body>
+</html>
