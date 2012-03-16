@@ -120,6 +120,7 @@ div.entryBody {
 div.body, div.extend {
     line-height: 1.889;
     padding: 2px 4px;
+    clear: both;
 }
 
 .tags, .posted {
