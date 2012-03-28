@@ -15,7 +15,7 @@ var MOW = {
             this.setCommentForm();
 
             if (location.hash) {
-                $(location.hash).animate(
+                $('#c' + location.hash.substr(1)).animate(
                     {backgroundColor: 'white'}, 1500,
                     function() {
                         $(this).animate(
