@@ -222,10 +222,15 @@ aside ul {
     margin: 0;
     padding: 5px;
 }
+
 aside li { 
     list-style-type: none;
     line-height: 1.8em;
     width: 100%;
+}
+
+aside li#expander { 
+    text-align: right;
 }
 
 aside li a {
