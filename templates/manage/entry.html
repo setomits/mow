@@ -84,6 +84,19 @@
     </div>
   </div>
   <div class="control-group">
+    <label for="subtitle" class="control-label">subtitle</label>
+    <div class="controls">
+{% if entry %}
+      <input type="text" id="subtitle" class="span6" value="{{ entry.subtitle }}" />
+      <input type="button" class="btn" value="Save"
+             onclick="MOW.updateEntry('subtitle')" />
+{% else %}
+      <input type="text" id="subtitle" class="span6" disabled="disabled" />
+      <input type="button" class="btn" disabled="disabled" value="Save" />
+{% endif %}
+    </div>
+  </div>
+  <div class="control-group">
     <label for="tags" class="control-label">tags</label>
     <div class="controls">
 {% if entry %}
