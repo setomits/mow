@@ -85,10 +85,10 @@
     </div>
   </div>
   <div class="control-group">
-    <label for="title" class="control-label">author</label>
+    <label for="author" class="control-label">author</label>
     <div class="controls">
 {% if comment %}
-      <input type="text" id="title" class="span6" value="{{ comment.author }}" />
+      <input type="text" id="author" class="span6" value="{{ comment.author }}" />
       <input type="button" class="btn" value="Save"
              onclick="MOW.updateComment('author')" />
 {% else %}
@@ -124,7 +124,7 @@
     </div>
   </div>
   <div class="control-group">
-    <label for="title" class="control-label">visible</label>
+    <label for="visible" class="control-label">visible</label>
     <div class="controls">
 {% if comment %}
       <input type="checkbox" id="visible"
