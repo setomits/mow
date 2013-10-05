@@ -112,6 +112,10 @@ article.entry > time {
     font-weight: bold;
 }
 
+blockquote {
+    background-color: #f8f8f8;
+}
+
 div.entryBody {
     border-top: 1px dotted;    
     margin-top: 2px;
