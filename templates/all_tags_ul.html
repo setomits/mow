@@ -1,9 +1,0 @@
-<ul class="tag_list">
-{% for tag in tags %}  
-  <li>
-    <a href="{{ blog_path }}/tag/{{ tag.urlencoded }}/" rel="tag"
-       title="{{ tag.name }} {{ tag.count }}">
-      <span>{{ tag.name }}<em>{{ tag.count }}</em></span></a>
-  </li>
-{% endfor %}
-</ul>
