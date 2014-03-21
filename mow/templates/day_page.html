@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}: {{ g.poted_on }}{% endblock %}
+
+{% block contents %}
+<p class="lead">
+  entries posted on
+  <a href="{{ url_for('day_page',
+                      year = g.posted_on.year,
+                      month = g.posted_on.month,
+                      day = g.posted_on.day) }}">
+    {{ g.posted_on|mdy }}
+  </a>
+</p>
+
+{% include "include/pager_for_day.html" %}
+{% for entry in g.entries %}
+{% set is_first = loop.first %}
+{% include "include/entry_short.html" %}
+{% endfor %}
+{% include "include/pager_for_day.html" %}
+{% endblock %}

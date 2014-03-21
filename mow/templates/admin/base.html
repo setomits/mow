@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"
+          rel="stylesheet">
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+    <title>Admin Page of {{ g.blog_title }}{% block title %}{% endblock %}</title>
+    <script>var mow = {};</script>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        logging in as {{ g.login_user.name }} |
+        <a href="{{ url_for('logout') }}">logout</a>
+      </div>
+      {% block contents %}{% endblock %}
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename = 'js/mow.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/mow_admin.js') }}"></script>
+  </body>
+</html>

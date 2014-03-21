@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <channel>
+    <title>{{ g.blog_title }}</title>
+    <link>{{ url_for('top_page') }}</link>
+    <!--description>Welcome to blogSetomits</description-->
+    <language>ja</language>
+    <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+    <generator>mow : blog with mod_wsgi</generator>
+    <atom:link rel="self" type="application/rss+xml"
+               href="{{ request.url }}" />
+    {% for entry in g.recent_entries[:g.entries_per_page] %}
+    <item>
+      <title>{{ entry.title }}</title>
+      <link>{{ request.url_root }}{{ entry.id }}</link>
+      <guid isPermaLink="true">{{ request.url_root }}{{ entry.id }}</guid>
+      <description><![CDATA[{{ entry.body }}]]></description>
+      <pubDate>{{ entry.posted_at|rfc822 }}</pubDate>
+      <dc:creator>{{ entry.author.name }}</dc:creator>
+    </item>
+    {% endfor %}
+
+    {% if with_comments %}
+    {% for comment in g.recent_comments[:g.entries_per_page] %}
+    <item>
+      <title>{{ comment.title }}</title>
+      <link>{{ request.url_root }}{{ comment.entry.id }}#c{{ comment.id }}</link>
+      <guid isPermaLink="true">
+        {{ request.url_root }}{{ comment.entry.id }}#c{{ comment.id }}
+      </guid>
+      <description><![CDATA[{{ comment.body }}]]></description>
+      <pubDate>{{ comment.posted_at|rfc822 }}</pubDate>
+      <dc:creator>{{ comment.author_name }}</dc:creator>
+    </item>
+    {% endfor %}
+    {% endif %}
+  </channel>
+</rss>

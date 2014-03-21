@@ -1,0 +1,34 @@
+CREATE TABLE comments (
+	id INTEGER NOT NULL, 
+	entry_id INTEGER, 
+	author_name VARCHAR, 
+	title VARCHAR, 
+	body TEXT, 
+	posted_at DATETIME, 
+	PRIMARY KEY (id)
+);
+CREATE TABLE entries (
+	id INTEGER NOT NULL, 
+	author_id INTEGER, 
+	title VARCHAR, 
+	subtitle VARCHAR, 
+	body TEXT, 
+	extend TEXT, 
+	posted_at DATETIME, 
+	PRIMARY KEY (id)
+);
+CREATE TABLE tags (
+	id INTEGER NOT NULL, 
+	entry_id INTEGER, 
+	label VARCHAR, 
+	PRIMARY KEY (id)
+);
+CREATE TABLE users (
+	id INTEGER NOT NULL, 
+	name VARCHAR, 
+	password_hash VARCHAR, 
+	registered_at DATETIME, 
+	PRIMARY KEY (id)
+);
+
+

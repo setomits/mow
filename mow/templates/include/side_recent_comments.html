@@ -1,0 +1,22 @@
+<div class="sub-block">
+  <div class="title">Recent Comments</div>
+  <div>
+    {% if g.recent_comments %}
+    <ul class="list-unstyled">
+      {% for comment in g.recent_comments[:g.items_for_side] %}
+      <li>
+        <a href="{{ url_for('entry_page',
+                            entry_id = comment.entry.id) }}#c{{ comment.id }}"
+           title="{{ comment.posted_at|mdy }} {{ comment.posted_at|hm }}" class="row">
+          <span class="col-sm-12">
+            {{ comment.title }} by {{ comment.author_name }}
+          </span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <span>no entries yet</span>
+    {% endif %}
+  </div>
+</div>

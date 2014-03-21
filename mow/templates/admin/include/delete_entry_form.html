@@ -1,0 +1,9 @@
+<form role="form" class="form-horizontal" method="POST"
+      action="{{ url_for('delete_entry') }}">
+  <input type="hidden" name="entry_id" value="{{ g.entry.id }}" />
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-danger">delete</button>
+    </div>
+  </div>
+</form>

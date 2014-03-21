@@ -1,0 +1,33 @@
+<form role="form" class="form-horizontal" id="comment-form" method="POST"
+      action="{{ url_for('post_comment') }}">
+  <input type="hidden" name="entry_id" id="entry_id" />
+  <div class="form-group">
+    <label for="author_name" class="col-sm-2 control-label">your name</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="author_name"
+             name="author_name" required />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="comment_title" class="col-sm-2 control-label">title</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="comment_title"
+             name="comment_title" required value="Re: {{ g.entry.title }}" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="comment_body" class="col-sm-2 control-label">body</label>
+    <div class="col-sm-10">
+      <textarea class="form-control" required
+                id="comment_body" name="comment_body"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button id="preview_comment" type="button"
+              class="btn btn-default">preview</button>
+      <button id="post_comment_button" type="submit"
+              class="btn btn-default" disabled>post</button>
+    </div>
+  </div>
+</form>

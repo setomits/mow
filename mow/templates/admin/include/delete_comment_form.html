@@ -1,0 +1,9 @@
+<form role="form" class="form-horizontal" method="POST"
+      action="{{ url_for('delete_comment') }}">
+  <input type="hidden" name="comment_id" value="{{ g.comment.id }}" />
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-danger">delete</button>
+    </div>
+  </div>
+</form>

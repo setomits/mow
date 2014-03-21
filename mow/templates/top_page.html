@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block contents %}
+{% for entry in g.recent_entries[:g.entries_per_page] %}
+{% set is_first = loop.first %}
+{% include "include/entry_short.html" %}
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,35 @@
+<article class="entry {{'following-entry' if not is_first }}">
+  <hgroup>
+    <h2>
+      <a href="{{ url_for('entry_page', entry_id = entry.id) }}">
+        {{ entry.title }}
+      </a>
+    </h2>
+    {% if entry.subtitle %}<h3>{{ entry.subtitle }}</h3>{% endif %}
+  </hgroup>
+  <time datetime="{{ entry.posted_at|iso8601 }}" pubdate>
+    {{ entry.posted_at|mdy }}
+  </time>
+  <div class="entry-text">
+    <div class="body">{{ entry.body|safe }}</div>
+    {% if entry.extend %}
+    <div class="extend">
+      <a href="{{ url_for('entry_page', entry_id = entry.id) }}">...</a>
+    </div>
+    {% endif %}
+  </div>
+  <nav class="tags">
+    {% for tag in entry.tags %}
+    <a href="{{ url_for('tag_page', label = tag.label) }}"
+       class="tag" rel="tag">
+      <span class="glyphicon glyphicon-tag"></span> {{ tag.label }}
+    </a>
+    {% endfor %}
+  </nav>
+  <div class="posted">
+    Posted at {{ entry.posted_at|hm }}
+    <a href="{{ url_for('entry_page', entry_id = entry.id) }}#comments">
+      Comments : {{ entry.n_comments }}
+    </a>
+  </div>
+</article>

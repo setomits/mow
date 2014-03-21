@@ -1,0 +1,26 @@
+<div class="sub-block">
+  <div class="title">Tags</div>
+  <div>
+    {% if g.tag_counts %}
+    <ul class="list-unstyled">
+      {% for label, count in g.tag_counts|hot_tags %}
+      <li>
+        <a href="{{ url_for('tag_page', label = label) }}"
+           title="{{ label }}({{ count }})" class="row">
+          <span class="col-sm-6 text-left">{{ label }}</span>
+          <span class="col-sm-6 text-right">{{ count }}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    <div class="row">
+      <a class="col-sm-12 text-right" href="{{ url_for('all_tags_page') }}">
+        <span class="glyphicon glyphicon-tags"></span>
+        all tags
+      </a>
+    </div>
+    {% else %}
+    <span>no tags yet</span>
+    {% endif %}
+  </div>
+</div>

@@ -1,0 +1,19 @@
+{% extends "admin/base.html" %}
+
+{% block contents %}
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#post" data-toggle="tab">post</a></li>
+  <li>
+    <a href="{{ url_for('entry_editing_page') }}">entry</a>
+  </li>
+  <li><a href="{{ url_for('comment_editing_page') }}">comment</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="active tab-pane" id="post">
+    <p>
+      {% include "admin/include/post_entry_form.html" %}
+    </p>
+  </div>
+</div>
+{% endblock %}

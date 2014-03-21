@@ -1,0 +1,19 @@
+<div class="sub-block">
+  <div class="title">Archives</div>
+  <div id="archives">
+    {% if g.archives %}
+    <ul class="list-unstyled">
+      {% for year, months in g.archives|dictsort %}
+      <li>{{ year }}:
+        {% for month, n in g.archives[year] %}
+        <a href="{{ url_for('month_page', year = year, month = month) }}"
+           title="{{ n }} entries">{{ month }}</a>
+        {% endfor %}
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <span>no archives yet</span>
+    {% endif %}
+  </div>
+</div>

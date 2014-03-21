@@ -1,0 +1,21 @@
+CREATE TABLE comments
+           (eid INTEGER CHECK(eid > 0), author TEXT, title TEXT, body TEXT,
+            visible INTEGER,
+            year INTEGER CHECK(year > 0),
+            month INTEGER CHECK(month BETWEEN 1 AND 12),
+            day INTEGER CHECK(day BETWEEN 1 AND 31),
+            hour INTEGER CHECK(hour BETWEEN 0 AND 23),
+            minute INTEGER CHECK(minute BETWEEN 0 AND 59),
+            ymdhm INTEGER);
+CREATE TABLE entries
+           (eid INTEGER PRIMARY KEY CHECK(eid > 0),
+            year INTEGER CHECK(year > 1976),
+            month INTEGER CHECK(month BETWEEN 1 AND 12),
+            day INTEGER CHECK(day BETWEEN 1 AND 31),
+            hour INTEGER CHECK(hour BETWEEN 0 AND 23),
+            minute INTEGER CHECK(minute BETWEEN 0 AND 59),
+            title TEXT, subtitle TEXT, body TEXT, extend TEXT,
+            ymdhm INTEGER);
+CREATE TABLE tags
+           (eid INTEGER CHECK(eid > 0), name TEXT, ymdhm INTEGER);
+

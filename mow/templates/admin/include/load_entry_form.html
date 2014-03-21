@@ -1,0 +1,16 @@
+<form role="form" class="form-horizontal" method="GET"
+      action="{{ url_for('entry_editing_page') }}">
+  <div class="form-group">
+    <label for="entry_id" class="col-sm-2 control-label">entry id</label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control" id="entry_id"
+             name="entry_id" value="{{ g.entry.id if g.entry }}"
+             placeholder="entry id"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">load</button>
+    </div>
+  </div>
+</form>

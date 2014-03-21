@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}: {{ g.label }}{% endblock %}
+
+{% block contents %}
+<p class="lead">
+  entries tagged with
+  &ldquo;<a href="{{ url_for('tag_page', label = g.label) }}">{{ g.label }}</a>&rdquo;
+</p>
+
+{% include "include/pager_for_tag.html" %}
+{% for entry in g.entries %}
+{% set is_first = loop.first %}
+{% include "include/entry_short.html" %}
+{% endfor %}
+{% include "include/pager_for_tag.html" %}
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}: {{ g.poted_in }}{% endblock %}
+
+{% block contents %}
+<p class="lead">
+  entries posted in
+  <a href="{{ url_for('month_page',
+                      year = g.posted_in.year, month = g.posted_in.month) }}">
+    {{ g.posted_in|my }}
+  </a>
+</p>
+
+{% include "include/pager_for_month.html" %}
+{% for entry in g.entries %}
+{% set is_first = loop.first %}
+{% include "include/entry_short.html" %}
+{% endfor %}
+{% include "include/pager_for_month.html" %}
+{% endblock %}

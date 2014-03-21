@@ -1,0 +1,18 @@
+<div class="sub-block">
+  <div class="title">Recent Entries</div>
+  <div>
+    {% if g.recent_entries %}
+    <ul class="list-unstyled">
+      {% for entry in g.recent_entries[:g.items_for_side] %}
+      <li>
+        <a href="{{ url_for('entry_page', entry_id = entry.id) }}" class="row">
+          <span class="col-sm-12">{{ entry.title }}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <span>no entries yet</span>
+    {% endif %}
+  </div>
+</div>

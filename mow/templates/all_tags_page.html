@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}: tags for entries{% endblock %}
+
+{% block contents %}
+<p class="lead">
+  tags for entries
+</p>
+
+<div id="all-tags">
+  {% for label, count in g.tag_counts %}
+  {% if loop.index % 3 == 1 %}<div class="row">{% endif %}
+    <span class="col-sm-4 cell">
+      <a href="{{ url_for('tag_page', label = label) }}" class="tag">
+        <span class="glyphicon glyphicon-tag"></span> {{ label }}
+      </a>
+      &times; {{ count }}
+    </span>
+    {% if loop.index % 3 == 0 or loop.last%}</div>{% endif %}
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+<nav class="paging row">
+  <span class="col-sm-6 text-left">
+    {% if g.has_older %}
+    <a href="{{ url_for('day_page', 
+                        year = g.posted_on.year, month = g.posted_on.month,
+                        day = g.posted_on.day, page = g.page + 1) }}">
+      <span class="glyphicon glyphicon-chevron-left"></span> older
+    </a>
+    {% else %}
+    &nbsp;
+    {% endif %}
+  </span>
+  <span class="col-sm-6 text-right">
+    {% if g.has_newer %}
+    <a href="{{ url_for('day_page', 
+                        year = g.posted_on.year, month = g.posted_on.month,
+                        day = g.posted_on.day, page = g.page - 1) }}">
+      newer <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+    {% else %}
+    &nbsp;
+    {% endif %}
+  </span>
+</nav>
