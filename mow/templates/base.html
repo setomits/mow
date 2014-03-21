@@ -23,9 +23,11 @@
   <body>
     <div class="container">
       <header>
-        <h1>
+        <h1 class="text-hide">
           <a href="{{ url_for('top_page') }}">
-            <span></span>{{ g.blog_title }}
+            <img src="{{ url_for('static', filename = 'img/logo.jpg') }}"
+                 width="279" height="73" title="{{ g.blog_title }}" />
+            {{ g.blog_title }}
           </a>
         </h1>
         <p class="lead">Hello</p>
