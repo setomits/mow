@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import g, render_template, redirect, request, session, url_for
+from flask import abort, g, render_template, redirect, request, session, url_for
 
 from mow import app
 from mow.models import User
