@@ -282,7 +282,8 @@ class User(db.Model, MyMixin):
     @staticmethod
     def make_hash(p):
         from hashlib import sha1
-        return sha1(p.encode('utf-8')).hexdigest()
+        return sha1(app.config['SECRET_KEY'].encode('utf-8') + \
+                    p.encode('utf-8')).hexdigest()
 
     @staticmethod
     def get_by_name(n):
