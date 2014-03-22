@@ -2,6 +2,7 @@ Flask
 Flask-SQLAlchemy
 Jinja2
 MarkupSafe
+python3-memcached
 SQLAlchemy
 Werkzeug
 itsdangerous
