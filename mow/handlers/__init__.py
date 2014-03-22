@@ -2,6 +2,7 @@
 
 from functools import wraps
 
+from memcache import Client
 from flask import g, redirect, request, session, url_for, Response
 
 from mow import app
@@ -33,6 +34,10 @@ def check_login_user():
             g.login_user = login_user
         else:
             session.pop('username', None)
+
+@app.before_request
+def load_memcache_client():
+    g.mc = Client(['127.0.0.1:11211'])
 
 @app.before_request
 def load_values_from_config():
