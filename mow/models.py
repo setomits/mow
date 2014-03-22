@@ -35,7 +35,7 @@ class MyMixin:
         db.session.delete(self)
         db.session.commit()
 
-    def save(self, clear_cache):
+    def save(self, clear_cache = True):
         if clear_cache:
             self.clear_memcache()
 
@@ -66,6 +66,11 @@ class Entry(db.Model, MyMixin):
         self.body = body
         self.extend = extend
         self.posted_at = datetime.now()
+
+    def save(self, clear_cache = True):
+        super(Entry, self).save(clear_cache = clear_cache)
+        if clear_cache:
+            g.mc.delete('Entry_archives')
 
     @property
     def author(self):
@@ -230,6 +235,10 @@ class Tag(db.Model, MyMixin):
         self.entry_id = entry_id
         self.label = label
 
+    def save(self):
+        super(Tag, self).save()
+        g.mc.delete('Tag_counts')
+
     @staticmethod
     def _query_for_label(label):
         return Tag.query.filter(Tag.label == label)
@@ -285,7 +294,7 @@ class Comment(db.Model, MyMixin):
         self.entry.clear_memcache()
         super(Comment, self).delete()
 
-    def save(self, clear_cache = False):
+    def save(self, clear_cache = True):
         self.entry.clear_memcache()
         if clear_cache:
             self.clear_memcache()
