@@ -66,7 +66,7 @@ def comment_editing_page():
             to_save = True
 
         if to_save:
-            comment.save(clear_cache = True)
+            comment.save()
 
     g.comment = comment
 

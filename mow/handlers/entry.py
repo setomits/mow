@@ -89,7 +89,7 @@ def entry_editing_page():
             to_save = True
 
         if to_save:
-            entry.save(clear_cache = True)
+            entry.save()
 
         labels = list(set([t.strip() for t in s_tags.split(',')]))
         tags = [tag for tag in entry.tags]
