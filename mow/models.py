@@ -5,6 +5,7 @@ from hashlib import sha1
 
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql import func
+from flask import g
 from flask.ext.sqlalchemy import SQLAlchemy
 
 from mow import app
@@ -17,7 +18,6 @@ def rollback():
 def remove_session():
     db.session.remove()
 
-
 class MyMixin:
     id = db.Column(db.Integer, primary_key = True)
 
@@ -27,11 +27,18 @@ class MyMixin:
     def __ne__(self, other):
         return not self.__eq__(other)
 
+    def clear_memcache(self):
+        g.mc.delete('%s_%d' % (self.__class__.__name__, self.id))
+
     def delete(self):
+        self.clear_memcache()
         db.session.delete(self)
         db.session.commit()
 
-    def save(self):
+    def save(self, clear_cache):
+        if clear_cache:
+            self.clear_memcache()
+
         db.session.add(self)
         db.session.commit()
         return self
@@ -111,7 +118,7 @@ class Entry(db.Model, MyMixin):
         return ', '.join([tag.label for tag in self.tags])
 
     @staticmethod
-    def fetch_archives():
+    def _fetch_archives():
         archives = {}
 
         oldest = Entry.query.order_by(Entry.posted_at).first()
@@ -137,6 +144,16 @@ class Entry(db.Model, MyMixin):
 
         return archives
 
+    @staticmethod
+    def fetch_archives():
+        mc_key = 'Entry_archives'
+        value = g.mc.get(mc_key)
+        if value is None:
+            value = Entry._fetch_archives()
+            if value:
+                g.mc.set(mc_key, value)
+
+        return value
 
     @staticmethod
     def fetch_recent_entries(entries_per_page = 5):
@@ -230,13 +247,22 @@ class Tag(db.Model, MyMixin):
         return Tag._query_for_label(label).count()
 
     @staticmethod
-    def fetch_tag_counts():
-        'SELECT name, COUNT(*) FROM tags GROUP BY name ORDER BY name;'
-
+    def _fetch_tag_counts():
         q = db.session.query(Tag.label, func.count(Tag.entry_id))
         q = q.group_by(Tag.label).order_by(Tag.label)
 
         return [(label, count) for label, count in q]
+
+    @staticmethod
+    def fetch_tag_counts():
+        mc_key = 'Tag_counts'
+        value = g.mc.get(mc_key)
+        if value is None:
+            value = Tag._fetch_tag_counts()
+            if value:
+                g.mc.set(mc_key, value)
+
+        return value
 
 
 class Comment(db.Model, MyMixin):
@@ -254,6 +280,16 @@ class Comment(db.Model, MyMixin):
         self.title = title
         self.body = body
         self.posted_at = datetime.now()
+
+    def delete(self):
+        self.entry.clear_memcache()
+        super(Comment, self).delete()
+
+    def save(self, clear_cache = False):
+        self.entry.clear_memcache()
+        if clear_cache:
+            self.clear_memcache()
+        super(Comment, self).save(clear_cache = clear_cache)
 
     @property
     def entry(self):
