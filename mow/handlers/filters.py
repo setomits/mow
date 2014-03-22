@@ -2,33 +2,34 @@
 
 from operator import itemgetter
 
+from tzlocal import get_localzone
 from flask import g, Markup
 
 from mow import app
 
 @app.template_filter()
-def ymdhms(s):
-    return s.strftime('%Y/%b/%d %H:%M:%S')
+def ymdhms(dt):
+    return dt.strftime('%Y/%b/%d %H:%M:%S')
 
 @app.template_filter()
-def rfc822(s):
-    return s.strftime('%a, %d %b %Y %H:%M:%S +0000')
+def rfc822(dt):
+    return get_localzone().localize(dt).strftime('%a, %d %b %Y %H:%M:%S %z')
 
 @app.template_filter()
-def iso8601(s):
-    return s.strftime('%Y-%m-%dT%H:%M:%SZ')
+def iso8601(dt):
+    return get_localzone().localize(dt).strftime('%Y-%m-%dT%H:%M:%S%z')
 
 @app.template_filter()
-def mdy(s):
-    return s.strftime('%b %d, %Y')
+def mdy(dt):
+    return dt.strftime('%b %d, %Y')
 
 @app.template_filter()
-def my(s):
-    return s.strftime('%b %Y')
+def my(dt):
+    return dt.strftime('%b %Y')
 
 @app.template_filter()
-def hm(s):
-    return s.strftime('%H:%M')
+def hm(dt):
+    return dt.strftime('%H:%M')
 
 @app.template_filter()
 def mb_truncate(s, length = 40, end = '...'):
