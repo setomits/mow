@@ -8,12 +8,18 @@ from mow.handlers import login_required
 
 @app.route('/<int:entry_id>')
 def entry_page(entry_id):
-    entry = Entry.get_by_id(entry_id)
-    if entry:
-        g.entry = entry
-        return render_template('entry_page.html')
-    else:
-        return abort(404)
+    mc_key = 'Entry_%d' % entry_id
+
+    html = g.mc.get(mc_key)
+    if html is None:
+        entry = Entry.get_by_id(entry_id)
+        if entry:
+            g.entry = entry
+            html = render_template('entry_page.html')
+            g.mc.set(mc_key, html)
+        else:
+            return abort(404)
+    return html
 
 
 @app.route('/admin/entry/post', methods = ['POST'])
@@ -83,7 +89,7 @@ def entry_editing_page():
             to_save = True
 
         if to_save:
-            entry.save()
+            entry.save(clear_cache = True)
 
         labels = list(set([t.strip() for t in s_tags.split(',')]))
         tags = [tag for tag in entry.tags]
