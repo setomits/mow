@@ -26,7 +26,7 @@ def post_comment():
         Comment(entry_id = entry.id,
                 author_name = author_name,
                 title = title,
-                body = body).save()
+                body = body).save(clear_cache = False)
 
         return redirect(url_for('entry_page', entry_id = entry.id))
     else:

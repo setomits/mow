@@ -40,10 +40,10 @@ def post_entry():
                       body = body,
                       title = title,
                       subtitle = subtitle,
-                      extend = extend).save()
+                      extend = extend).save(clear_cache = False)
         labels = set([tag.strip() for tag in s_tags.split(',')])
         for label in labels:
-            Tag(entry.id, label).save()
+            Tag(entry.id, label).save(clear_cache = False)
 
         return redirect(url_for('entry_editing_page', entry_id = entry.id))
     else:
@@ -99,7 +99,7 @@ def entry_editing_page():
                 tag.delete()
 
             for label in labels:
-                Tag(entry.id, label).save()
+                Tag(entry.id, label).save(clear_cache = False)
 
     g.entry = entry
 

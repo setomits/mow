@@ -69,8 +69,7 @@ class Entry(db.Model, MyMixin):
 
     def save(self, clear_cache = True):
         super(Entry, self).save(clear_cache = clear_cache)
-        if clear_cache:
-            g.mc.delete('Entry_archives')
+        g.mc.delete('Entry_archives')
 
     @property
     def author(self):
@@ -235,8 +234,8 @@ class Tag(db.Model, MyMixin):
         self.entry_id = entry_id
         self.label = label
 
-    def save(self):
-        super(Tag, self).save()
+    def save(self, clear_cache = False):
+        super(Tag, self).save(clear_cache = clear_cache)
         g.mc.delete('Tag_counts')
 
     @staticmethod
@@ -295,10 +294,8 @@ class Comment(db.Model, MyMixin):
         super(Comment, self).delete()
 
     def save(self, clear_cache = True):
-        self.entry.clear_memcache()
-        if clear_cache:
-            self.clear_memcache()
         super(Comment, self).save(clear_cache = clear_cache)
+        self.entry.clear_memcache()
 
     @property
     def entry(self):
