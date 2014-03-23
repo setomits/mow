@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}login{% endblock %}
+{% block title %} login{% endblock %}
 
 {% block contents %}
 <form role="form" class="form-horizontal"
@@ -19,6 +19,13 @@
              id="password" name="password" />
     </div>
   </div>
-  <button type="submit" class="btn btn-default">login</button>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-log-in"></span>
+        login
+      </button>
+    </div>
+  </div>
 </form>
 {% endblock %}
