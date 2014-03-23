@@ -14,10 +14,24 @@
   </head>
   <body>
     <div class="container">
-      <div>
-        logging in as {{ g.login_user.name }} |
-        <a href="{{ url_for('logout') }}">logout</a>
-      </div>
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="{{ url_for('admin_top_page') }}">
+              admin of {{ g.blog_title }}
+            </a>
+          </div>
+
+          <ul class="nav navbar-nav">
+            <li><a href="{{ url_for('top_page') }}">{{ g.blog_title }}</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>logging in as {{ g.login_user.name }}</a></li>
+            <li><a class="navbar-link" href="{{ url_for('logout') }}">logout</a></li>
+            </li>
+          </ul>
+        </div>
+      </nav>
       {% block contents %}{% endblock %}
     </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
