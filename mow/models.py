@@ -47,6 +47,9 @@ class MyMixin:
     def get_by_id(cls, id):
         return cls.query.filter(cls.id == id).first()
 
+    @classmethod
+    def n_total_count(cls):
+        return cls.query.count()
 
 class Entry(db.Model, MyMixin):
     __tablename__ = 'entries'
