@@ -1,0 +1,16 @@
+<h3>config values</h3>
+<ul>
+  <li>BLOG_TITLE: {{ g.blog_title }}</li>
+  <li>ENTRIES_PER_PAGE: {{ g.entries_per_page }}</li>
+  <li>ITEMS_FOR_SIDE: {{ g.items_for_side }}</li>
+  <li>SQLALCHEMY_DATABASE_URI: {{ g.sqlalchemy_database_uri }}</li>
+</ul>
+
+<h3>stats</h3>
+<ul>
+  <li>entries: {{ g.n_total_entries|thousands_comma }}</li>
+  <li>comments: {{ g.n_total_comments|thousands_comma }}</li>
+  <li>tags: {{ g.n_total_tags|thousands_comma }}</li>
+  <li>users: {{ g.n_total_users|thousands_comma }}</li>
+</ul>
+
