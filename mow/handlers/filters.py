@@ -43,6 +43,10 @@ def target_blank(s):
     return s.replace('a href=', Markup('a target="_blank" href='))
 
 @app.template_filter()
+def thousands_comma(x):
+    return format(x, ',d')
+
+@app.template_filter()
 def nl2br(s):
     if isinstance(s, str):
         s = Markup(s)
