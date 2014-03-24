@@ -4,7 +4,8 @@
 
 {% block contents %}
 <ul class="nav nav-tabs">
-  <li><a href="{{ url_for('admin_top_page') }}">post</a></li>
+  <li><a href="{{ url_for('admin_top_page') }}">admin top</a></li>
+  <li><a href="{{ url_for('entry_posting_page') }}">post</a></li>
   <li><a href="{{ url_for('entry_editing_page') }}">entry</a></li>
   <li class="active"><a href="#edit" data-toggle="tab">comment</a></li>
 </ul>
