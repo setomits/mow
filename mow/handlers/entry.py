@@ -22,32 +22,34 @@ def entry_page(entry_id):
     return html
 
 
-@app.route('/admin/entry/post', methods = ['POST'])
+@app.route('/admin/entry/post', methods = ['GET', 'POST'])
 @login_required
-def post_entry():
-    user_name = request.form.get('user_name', '').strip()
-    title = request.form.get('title', '').strip()
-    subtitle = request.form.get('subtitle', '').strip()
-    body = request.form.get('body', '').strip()
-    extend = request.form.get('extend', '').strip()
-    s_tags = request.form.get('tags', '').strip()
-
-    if body:
-        user = User.get_by_name(user_name)
-
-
-        entry = Entry(author_id = user.id if user else g.login_user.id,
-                      body = body,
-                      title = title,
-                      subtitle = subtitle,
-                      extend = extend).save(clear_cache = False)
-        labels = set([tag.strip() for tag in s_tags.split(',')])
-        for label in labels:
-            Tag(entry.id, label).save(clear_cache = False)
-
-        return redirect(url_for('entry_editing_page', entry_id = entry.id))
+def entry_posting_page():
+    if request.method == 'GET':
+        return render_template('admin/entry_post_page.html')
     else:
-        return abort(400)
+        user_name = request.form.get('user_name', '').strip()
+        title = request.form.get('title', '').strip()
+        subtitle = request.form.get('subtitle', '').strip()
+        body = request.form.get('body', '').strip()
+        extend = request.form.get('extend', '').strip()
+        s_tags = request.form.get('tags', '').strip()
+
+        if body:
+            user = User.get_by_name(user_name)
+
+            entry = Entry(author_id = user.id if user else g.login_user.id,
+                          body = body,
+                          title = title,
+                          subtitle = subtitle,
+                          extend = extend).save(clear_cache = False)
+            labels = set([tag.strip() for tag in s_tags.split(',')])
+            for label in labels:
+                Tag(entry.id, label).save(clear_cache = False)
+
+            return redirect(url_for('entry_editing_page', entry_id = entry.id))
+        else:
+            return abort(400)
 
 
 @app.route('/admin/entry/edit', methods = ['GET', 'POST'])
