@@ -36,15 +36,15 @@ def check_login_user():
             session.pop('username', None)
 
 @app.before_request
-def load_memcache_client():
-    g.mc = Client(['127.0.0.1:11211'])
-
-@app.before_request
 def load_values_from_config():
     g.blog_title = app.config['BLOG_TITLE']
     g.entries_per_page = app.config['ENTRIES_PER_PAGE']
     g.items_for_side = app.config['ITEMS_FOR_SIDE']
+    g.mc_servers = app.config['MC_SERVERS']
 
+@app.before_request
+def load_memcache_client():
+    g.mc = Client(g.mc_servers)
 
 @app.before_request
 def load_values_for_side():
