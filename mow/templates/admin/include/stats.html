@@ -4,13 +4,32 @@
   <li>ENTRIES_PER_PAGE: {{ g.entries_per_page }}</li>
   <li>ITEMS_FOR_SIDE: {{ g.items_for_side }}</li>
   <li>SQLALCHEMY_DATABASE_URI: {{ g.sqlalchemy_database_uri }}</li>
+  <li>
+    MC_SERVERS: [
+    {% for mc_server in g.mc_servers %}'{{ mc_server }}', {% endfor %}
+    ]
+  </li>
 </ul>
 
-<h3>stats</h3>
+<h3>stats of db</h3>
 <ul>
+  <li>last update: {{ g.db_updated_at|ymdhms }}</li>
+  <li>sizes: {{ g.db_mbytes }} mb</li>
   <li>entries: {{ g.n_total_entries|thousands_comma }}</li>
   <li>comments: {{ g.n_total_comments|thousands_comma }}</li>
   <li>tags: {{ g.n_total_tags|thousands_comma }}</li>
   <li>users: {{ g.n_total_users|thousands_comma }}</li>
 </ul>
 
+<h3>stats of memcached</h3>
+<ul>
+  {% for server in g.mc_stats %}
+  <li>{{ server }}:
+    <ul>
+      {% for k in g.mc_stats[server] %}
+      <li>{{ k }}: {{ g.mc_stats[server][k] }}</li>
+      {% endfor %}
+    </ul>
+  </li>
+  {% endfor %}
+</ul>
