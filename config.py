@@ -7,7 +7,7 @@ class _Config:
     ENTRIES_PER_PAGE = 5
     ITEMS_FOR_SIDE = 10
     BLOG_TITLE = 'blogSetomits'
-
+    MC_SERVERS = ['localhost:11211',]
 
 class DevelopmentConfig(_Config):
     DEBUG = True
