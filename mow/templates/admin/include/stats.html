@@ -27,7 +27,11 @@
   <li>{{ server }}:
     <ul>
       {% for k in g.mc_stats[server] %}
+      {% if k == 'hit_ratio' %}
       <li>{{ k }}: {{ g.mc_stats[server][k] }}</li>
+      {% else %}
+      <li>{{ k }}: {{ g.mc_stats[server][k]|thousands_comma }}</li>
+      {% endif %}
       {% endfor %}
     </ul>
   </li>
