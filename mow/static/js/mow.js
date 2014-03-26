@@ -15,7 +15,6 @@ mow.init = function() {
             $('#preview > .comment-title')
                 .text($.trim($('#comment_title').val()));
             $('#preview > .body').html(preview_body).autolink();
-//            $('#preview > .body').autolink();
             $('#preview').removeClass('hidden');
 
             $('#post_comment_button')
