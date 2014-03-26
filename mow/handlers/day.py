@@ -7,7 +7,7 @@ from flask import g, redirect, render_template, url_for
 from mow import app
 from mow.models import Entry
 
-@app.route('/day/<int:year>-<int:month>-<int:day>')
+@app.route('/day/<int:year>-<int:month>-<int:day>/')
 @app.route('/day/<int:year>-<int:month>-<int:day>/<int:page>')
 def day_page(year, month, day, page = 1):
     if page < 1:
@@ -35,7 +35,7 @@ def day_page(year, month, day, page = 1):
 
         return render_template('day_page.html')
 
-@app.route('/month/<int:year>-<int:month>')
+@app.route('/month/<int:year>-<int:month>/')
 @app.route('/month/<int:year>-<int:month>/<int:page>')
 def month_page(year, month, page = 1):
     if page < 1:

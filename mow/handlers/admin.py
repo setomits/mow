@@ -8,7 +8,7 @@ from mow import app
 from mow.models import Comment, Entry, Tag, User
 from mow.handlers import login_required
 
-@app.route('/admin')
+@app.route('/admin/')
 @login_required
 def admin_top_page():
     g.sqlalchemy_database_uri \

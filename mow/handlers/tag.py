@@ -5,7 +5,7 @@ from flask import g, redirect, render_template, url_for
 from mow import app
 from mow.models import Entry, Tag
 
-@app.route('/tag/<label>')
+@app.route('/tag/<label>/')
 @app.route('/tag/<label>/<int:page>')
 def tag_page(label, page = 1):
     if page < 1:
@@ -27,6 +27,6 @@ def tag_page(label, page = 1):
     return render_template('tag_page.html')
 
 
-@app.route('/tag')
+@app.route('/tag/')
 def all_tags_page():
     return render_template('all_tags_page.html')
