@@ -37,49 +37,12 @@
     </a>
   </div>
 
-  <nav class="paging row">
-    <span class="col-sm-4 text-left">
-      {% if g.entry.previous_entry %}
-      <a href="{{ url_for('entry_page', entry_id = g.entry.previous_entry.id) }}">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-        {{ g.entry.previous_entry.title }}
-      </a>
-      {% else %}
-      &nbsp;
-      {% endif %}
-    </span>
-    <span class="col-sm-4 text-center">
-      <a href="{{ url_for('top_page') }}">
-        <span class="glyphicon glyphicon-home"></span> Main</a>
-    </span>
-    <span class="col-sm-4 text-right">
-      {% if g.entry.next_entry %}
-      <a href="{{ url_for('entry_page', entry_id = g.entry.next_entry.id) }}">
-        {{ g.entry.next_entry.title }}
-        <span class="glyphicon glyphicon-chevron-right"></span>
-      </a>
-      {% else %}
-      &nbsp;
-      {% endif %}
-    </span>
-  </nav>
+  {% include "include/pager_for_entry.html" %}
 
   <div id="comments">
     {% if g.entry.n_comments %}
     {% for comment in g.entry.comments %}
-    <article class="comment" id="c{{ comment.id }}">
-      <div class="comment-title">
-        <a name="c{{ comment.id }}">{{ comment.title }}</a>
-      </div>
-      <div class="body">{{ comment.body|urlize|target_blank|nl2br }}</div>
-      <div class="posted">
-        Posted at
-        <time datetime="{{ comment.posted_at|iso8601 }}" pubdate>
-          {{ comment.posted_at|mdy }} {{ comment.posted_at|hm }}
-        </time>
-        by {{ comment.author_name }}
-      </div>
-    </article>
+    {% include "include/comment.html" %}
     {% endfor %}
     {% endif %}
   </div>

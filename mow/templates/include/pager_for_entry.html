@@ -1,0 +1,26 @@
+<nav class="paging row">
+  <span class="col-sm-4 text-left">
+    {% if g.entry.previous_entry %}
+    <a href="{{ url_for('entry_page', entry_id = g.entry.previous_entry.id) }}">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      {{ g.entry.previous_entry.title }}
+    </a>
+    {% else %}
+    &nbsp;
+    {% endif %}
+  </span>
+  <span class="col-sm-4 text-center">
+    <a href="{{ url_for('top_page') }}">
+      <span class="glyphicon glyphicon-home"></span> Main</a>
+  </span>
+  <span class="col-sm-4 text-right">
+    {% if g.entry.next_entry %}
+    <a href="{{ url_for('entry_page', entry_id = g.entry.next_entry.id) }}">
+      {{ g.entry.next_entry.title }}
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+    {% else %}
+    &nbsp;
+    {% endif %}
+  </span>
+</nav>
