@@ -43,6 +43,7 @@ def entry_posting_page():
                           title = title,
                           subtitle = subtitle,
                           extend = extend).save(clear_cache = False)
+            entry.previous_entry.clear_memcache()
             labels = set([tag.strip() for tag in s_tags.split(',')])
             for label in labels:
                 Tag(entry.id, label).save(clear_cache = False)
