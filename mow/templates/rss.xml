@@ -5,7 +5,7 @@
      xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <channel>
     <title>{{ g.blog_title }}</title>
-    <link>{{ url_for('top_page') }}</link>
+    <link>{{ request.url_root }}</link>
     <!--description>Welcome to blogSetomits</description-->
     <language>ja</language>
     <docs>http://blogs.law.harvard.edu/tech/rss</docs>
