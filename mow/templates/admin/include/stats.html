@@ -14,7 +14,7 @@
 <h3>stats of db</h3>
 <ul>
   <li>last update: {{ g.db_updated_at|ymdhms }}</li>
-  <li>sizes: {{ g.db_mbytes }} mb</li>
+  <li>sizes: {{ g.db_bytes|filesizeformat }}</li>
   <li>entries: {{ g.n_total_entries|thousands_comma }}</li>
   <li>comments: {{ g.n_total_comments|thousands_comma }}</li>
   <li>tags: {{ g.n_total_tags|thousands_comma }}</li>
