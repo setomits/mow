@@ -1,0 +1,12 @@
+{% extends "admin/base.html" %}
+
+{% block title %} memcache{% endblock %}
+
+{% block contents %}
+<p>
+  {% include "admin/include/load_cache_form.html" %}
+</p>
+<p>
+  {% include "admin/include/clear_cache_form.html" %}
+</p>
+{% endblock %}
