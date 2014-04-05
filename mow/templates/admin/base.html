@@ -43,6 +43,9 @@
         <li class="{{ 'active' if g.active['comment'] }}">
           <a href="{{ url_for('comment_editing_page') }}">comment</a>
         </li>
+        <li class="{{ 'active' if g.active['tag'] }}">
+          <a href="{{ url_for('tag_editing_page') }}">tag</a>
+        </li>
         <li class="{{ 'active' if g.active['memcache'] }}">
           <a href="{{ url_for('admin_memcache_page') }}">memcache</a>
         </li>
