@@ -3,29 +3,18 @@
 {% block title %}{{': editing %s' % g.entry.title if g.entry }}{% endblock %}
 
 {% block contents %}
-<ul class="nav nav-tabs">
-  <li><a href="{{ url_for('admin_top_page') }}">admin top</a></li>
-  <li><a href="{{ url_for('entry_posting_page') }}">post</a></li>
-  <li class="active"><a href="#edit') }}" data-toggle="tab">entry</a></li>
-  <li><a href="{{ url_for('comment_editing_page') }}">comment</a></li>
-</ul>
+<p>
+  {% include "admin/include/load_entry_form.html" %}
+</p>
 
-<div class="tab-content">
-  <div class="tab-pane active" id="edit">
-    <p>
-      {% include "admin/include/load_entry_form.html" %}
-    </p>
-
-    {% if g.entry %}
-    <hr />
-    <p>
-      {% include "admin/include/edit_entry_form.html" %}
-    </p>
-    <hr />
-    <p>
+{% if g.entry %}
+<hr />
+<p>
+  {% include "admin/include/edit_entry_form.html" %}
+</p>
+<hr />
+<p>
       {% include "admin/include/delete_entry_form.html" %}
-    </p>
-    {% endif %}
-  </div>
-</div>
+</p>
+{% endif %}
 {% endblock %}

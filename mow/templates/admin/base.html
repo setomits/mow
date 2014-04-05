@@ -21,18 +21,37 @@
               admin of {{ g.blog_title }}
             </a>
           </div>
-
           <ul class="nav navbar-nav">
             <li><a href="{{ url_for('top_page') }}">{{ g.blog_title }}</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a>logging in as {{ g.login_user.name }}</a></li>
             <li><a class="navbar-link" href="{{ url_for('logout') }}">logout</a></li>
-            </li>
           </ul>
         </div>
       </nav>
-      {% block contents %}{% endblock %}
+      <ul class="nav nav-tabs">
+        <li class="{{ 'active' if g.active['top'] }}">
+          <a href="{{ url_for('admin_top_page') }}">admin top</a>
+        </li>
+        <li class="{{ 'active' if g.active['post'] }}">
+          <a href="{{ url_for('entry_posting_page') }}">post</a>
+        </li>
+        <li class="{{ 'active' if g.active['entry'] }}">
+          <a href="{{ url_for('entry_editing_page') }}">entry</a>
+        </li>
+        <li class="{{ 'active' if g.active['comment'] }}">
+          <a href="{{ url_for('comment_editing_page') }}">comment</a>
+        </li>
+        <li class="{{ 'active' if g.active['memcache'] }}">
+          <a href="{{ url_for('admin_memcache_page') }}">memcache</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="active tab-pane">
+          {% block contents %}{% endblock %}
+        </div>
+      </div>
     </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>

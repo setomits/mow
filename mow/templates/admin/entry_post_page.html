@@ -3,18 +3,7 @@
 {% block title %} post entry{% endblock %}
 
 {% block contents %}
-<ul class="nav nav-tabs">
-  <li><a href="{{ url_for('admin_top_page') }}">admin top</a></li>
-  <li class="active"><a href="#post">post</a></li>
-  <li><a href="{{ url_for('entry_editing_page') }}">entry</a></li>
-  <li><a href="{{ url_for('comment_editing_page') }}">comment</a></li>
-</ul>
-
-<div class="tab-content">
-  <div class="tab-pane active" id="post">
-    <p>
-      {% include "admin/include/post_entry_form.html" %}
-    </p>
-  </div>
-</div>
+<p>
+  {% include "admin/include/post_entry_form.html" %}
+</p>
 {% endblock %}
