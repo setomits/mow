@@ -26,6 +26,7 @@ def entry_page(entry_id):
 @login_required
 def entry_posting_page():
     if request.method == 'GET':
+        g.active = {'post': True}
         return render_template('admin/entry_post_page.html')
     else:
         user_name = request.form.get('user_name', '').strip()
@@ -56,6 +57,8 @@ def entry_posting_page():
 @app.route('/admin/entry/edit', methods = ['GET', 'POST'])
 @login_required
 def entry_editing_page():
+    g.active = {'entry': True}
+
     if request.method == 'GET':
         entry_id = request.args.get('entry_id', '').strip()
     else:

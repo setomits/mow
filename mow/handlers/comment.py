@@ -36,6 +36,8 @@ def post_comment():
 @app.route('/admin/comment/edit', methods = ['GET', 'POST'])
 @login_required
 def comment_editing_page():
+    g.active = {'comment': True}
+
     if request.method == 'GET':
         comment_id = request.args.get('comment_id', '').strip()
     else:
