@@ -275,6 +275,19 @@ class Tag(db.Model, MyMixin):
 
         return value
 
+    @staticmethod
+    def fetch_all_labels():
+        q = db.session.query(Tag.label.distinct()).order_by(Tag.label)
+        return [t[0] for t in q]
+
+    @staticmethod
+    def update_label(current_label, new_label):
+        Tag.query.filter(Tag.label == current_label).update(dict(
+            label = new_label
+        ))
+        db.session.commit()
+        g.mc.delete('Tag_counts')
+
 
 class Comment(db.Model, MyMixin):
     __tablename__ = 'comments'
