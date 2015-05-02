@@ -35,23 +35,28 @@ def hm(dt):
 def mb_truncate(s, length = 40, end = '...'):
     return s if len(s) < length else s[:length] + end
 
+def _as_markup(x):
+    if isinstance(x, str):
+        x = Markup(x)
+
+    return x
+
 @app.template_filter()
 def target_blank(s):
-    if isinstance(s, str):
-        s = Markup(s)
+    return _as_markup(s).replace('a href=', Markup('a target="_blank" href='))
 
-    return s.replace('a href=', Markup('a target="_blank" href='))
+@app.template_filter()
+def nl2br(s):
+    return _as_markup(s).replace('\n', Markup('<br />\n'))
+
+@app.template_filter()
+def responsive_image(s):
+    return _as_markup(s).replace('img ',
+                                 Markup('img class="img-responsive" '))
 
 @app.template_filter()
 def thousands_comma(x):
     return format(x, ',d')
-
-@app.template_filter()
-def nl2br(s):
-    if isinstance(s, str):
-        s = Markup(s)
-
-    return s.replace('\n', Markup('<br />\n'))
 
 @app.template_filter()
 def hot_tags(t):
