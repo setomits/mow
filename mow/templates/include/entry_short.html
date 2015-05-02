@@ -11,7 +11,7 @@
     {{ entry.posted_at|mdy }}
   </time>
   <div class="entry-text">
-    <div class="body">{{ entry.body|nl2br }}</div>
+    <div class="body">{{ entry.body|nl2br|responsive_image }}</div>
     {% if entry.extend %}
     <div class="extend">
       <a href="{{ url_for('entry_page', entry_id = entry.id) }}">...</a>
